@@ -10,7 +10,7 @@
 } */
 
 body{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     font-family:'Poppins', sans-serif;
 }
@@ -281,6 +281,7 @@ section{
 
 .about-containers,
 .about-details-container{
+    margin-top: 20px;
     display: flex;
     gap: 1rem;
 }
