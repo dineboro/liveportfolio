@@ -10,7 +10,7 @@
 } */
 
 body{
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     font-family:'Poppins', sans-serif;
 }
@@ -148,7 +148,7 @@ a:hover{
 
 /* SECTIONS */
 section{
-    padding-top: 4vh;
+    padding-top: 6vh;
     height: 96vh;
     margin: 0 10rem;
     box-sizing: border-box;
