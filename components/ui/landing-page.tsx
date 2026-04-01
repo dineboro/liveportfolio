@@ -188,7 +188,7 @@ export function DesignAgency() {
                   style={{ aspectRatio: '3/4' }}
                 >
                   <Image
-                    src="/assets/about.JPG"
+                    src="/assets/aboutme.JPG"
                     alt="Dine Boro"
                     fill
                     className="object-cover object-top"
@@ -366,7 +366,7 @@ export function DesignAgency() {
                 {/* Photo frame */}
                 <div className="relative w-[260px] md:w-[300px] overflow-hidden rounded-2xl border-4 border-muted shadow-xl" style={{ aspectRatio: '3/4' }}>
                   <Image
-                    src="/assets/about.JPG"
+                    src="/assets/aboutme.JPG"
                     alt="Dine Boro"
                     fill
                     className="object-cover object-top"
