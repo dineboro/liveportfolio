@@ -117,71 +117,88 @@ export function DesignAgency() {
     <div className="flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section id="home" className="w-full py-12 md:py-24 lg:py-32 xl:py-40 overflow-hidden">
+      <section id="home" className="w-full py-12 md:py-24 lg:py-32 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl bg-gradient-to-br from-background to-muted/30">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="flex flex-col items-center text-center space-y-5 py-12 md:py-16"
-          >
-            <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12 md:py-16">
+
+            {/* Text */}
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="flex flex-col items-center text-center md:items-start md:text-left space-y-5"
+            >
+              <div className="space-y-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-flex items-center rounded-3xl bg-muted px-3 py-1 text-sm"
+                >
+                  👋 Open to opportunities
+                </motion.div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                  className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                >
+                  Hello, I&apos;m{" "}
+                  <span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">
+                    Dine Boro
+                  </span>
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
+                  className="text-xl font-medium text-foreground/80"
+                >
+                  Full-Stack Web Developer &amp; UX-Focused Designer
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.4 }}
+                  className="max-w-[480px] text-muted-foreground md:text-lg"
+                >
+                  I build responsive, accessible web applications from front-end interfaces
+                  to back-end logic, with a strong focus on clean code, usability, and performance.
+                </motion.p>
+              </div>
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center rounded-3xl bg-muted px-3 py-1 text-sm"
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6 }}
+                className="flex flex-col gap-3 sm:flex-row"
               >
-                👋 Open to opportunities
+                <a href="#projects" className={cn(buttonVariants({ size: "lg" }), "rounded-3xl group")}>
+                  View My Work
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+                <a href="#contact" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "rounded-3xl")}>
+                  Contact Me
+                </a>
               </motion.div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-              >
-                Hello, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">
-                  Dine Boro
-                </span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="text-xl font-medium text-foreground/80"
-              >
-                Full-Stack Web Developer &amp; UX-Focused Designer
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="max-w-[580px] mx-auto text-muted-foreground md:text-lg"
-              >
-                I build responsive, accessible web applications from front-end interfaces
-                to back-end logic, with a strong focus on clean code, usability, and performance.
-              </motion.p>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-              className="flex flex-col gap-3 sm:flex-row justify-center"
-            >
-              <a href="#projects" className={cn(buttonVariants({ size: "lg" }), "rounded-3xl group")}>
-                View My Work
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a href="#contact" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "rounded-3xl")}>
-                Contact Me
-              </a>
             </motion.div>
+
+            {/* Portrait photo */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative h-[320px] w-full max-w-3xl overflow-hidden rounded-3xl mt-4"
+              initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex items-center justify-center"
             >
-              <Image
-                src="/assets/about.JPG"
-                alt="Dine Boro"
-                fill className="object-cover object-top" priority
-              />
+              <div className="relative">
+                <div className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl border-2 border-primary/40 -z-10" />
+                <div
+                  className="relative w-[240px] sm:w-[280px] md:w-[300px] overflow-hidden rounded-2xl border-4 border-muted shadow-xl"
+                  style={{ aspectRatio: '3/4' }}
+                >
+                  <Image
+                    src="/assets/about.JPG"
+                    alt="Dine Boro"
+                    fill
+                    className="object-cover object-top"
+                    priority
+                  />
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+
+          </div>
         </div>
       </section>
 
