@@ -65,42 +65,34 @@ const projects = [
   {
     title: "Boro Media",
     description: "Business website built with WordPress — live production site",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80",
+    image: "/assets/boromedia.JPG",
     liveUrl: "https://boromediaa.com/",
     githubUrl: null,
     tag: "WordPress",
-    span: "md:col-span-2 md:row-span-2",
-    height: "h-[400px] md:h-auto",
   },
   {
     title: "Bola Cleaning LLC",
     description: "Business website built with WordPress for a cleaning company",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80",
+    image: "/assets/bola.JPG",
     liveUrl: "https://bolacleaningllc.com/",
     githubUrl: null,
     tag: "WordPress",
-    span: "",
-    height: "h-[200px]",
   },
   {
     title: "Workopia",
     description: "Job listing web application built with PHP & Laravel",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80",
+    image: "/assets/workopia.png",
     liveUrl: "https://march141.sg-host.com/",
     githubUrl: null,
     tag: "Laravel",
-    span: "",
-    height: "h-[200px]",
   },
   {
     title: "Sass Design Project",
     description: "CSS/Sass design experiment — The Unicorn",
-    image: "https://images.unsplash.com/photo-1618788372246-79faff0c3742?w=600&q=80",
+    image: "/assets/sass.png",
     liveUrl: "https://theunicornsass.netlify.app/",
     githubUrl: "https://github.com/dineboro/design-beginner",
     tag: "Sass",
-    span: "md:col-span-2",
-    height: "h-[200px]",
   },
 ]
 
@@ -108,11 +100,18 @@ const projects = [
 
 export function DesignAgency() {
   const [scrollY, setScrollY] = useState(0)
+  const [formSent, setFormSent] = useState(false)
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormSent(true)
+  }
 
   return (
     <div className="flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
@@ -177,9 +176,9 @@ export function DesignAgency() {
               className="relative h-[320px] w-full max-w-3xl overflow-hidden rounded-3xl mt-4"
             >
               <Image
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80"
-                alt="Developer workspace"
-                fill className="object-cover" priority
+                src="/assets/about.JPG"
+                alt="Dine Boro"
+                fill className="object-cover object-top" priority
               />
             </motion.div>
           </motion.div>
@@ -247,31 +246,32 @@ export function DesignAgency() {
 
           <motion.div
             variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="mx-auto grid max-w-7xl gap-3 py-6 md:grid-cols-4 md:grid-rows-2"
+            className="grid gap-6 py-6 sm:grid-cols-2 lg:grid-cols-2"
           >
             {projects.map((project, index) => (
               <motion.div
-                key={index} variants={itemFadeIn} whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}
-                className={`group relative overflow-hidden rounded-3xl ${project.span} ${project.height}`}
+                key={index} variants={itemFadeIn} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}
+                className="rounded-3xl border bg-background overflow-hidden flex flex-col"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity group-hover:opacity-100 z-10" />
-                <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
-                <div className="absolute top-3 left-3 z-20">
-                  <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">{project.tag}</span>
+                <div className="relative h-[220px] w-full overflow-hidden">
+                  <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-300 hover:scale-105" />
+                  <div className="absolute top-3 left-3">
+                    <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">{project.tag}</span>
+                  </div>
                 </div>
-                <div className="absolute inset-0 z-20 flex flex-col justify-end p-5 text-white opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="p-5 flex flex-col gap-3 flex-1">
                   <h3 className="text-lg font-bold">{project.title}</h3>
-                  <p className="text-sm text-white/80 mb-3">{project.description}</p>
-                  <div className="flex gap-2">
+                  <p className="text-sm text-muted-foreground flex-1">{project.description}</p>
+                  <div className="flex gap-2 pt-1">
                     {project.liveUrl && (
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-xs bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-3 py-1.5 hover:bg-white/30 transition-colors">
+                        className={cn(buttonVariants({ size: "sm", variant: "default" }), "rounded-full gap-1")}>
                         Live Demo <ArrowUpRight className="h-3 w-3" />
                       </a>
                     )}
                     {project.githubUrl && (
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-xs bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-3 py-1.5 hover:bg-white/30 transition-colors">
+                        className={cn(buttonVariants({ size: "sm", variant: "outline" }), "rounded-full gap-1")}>
                         GitHub <ExternalLink className="h-3 w-3" />
                       </a>
                     )}
@@ -345,8 +345,8 @@ export function DesignAgency() {
             >
               <div className="relative h-[420px] w-full overflow-hidden rounded-3xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80"
-                  alt="Coding" fill className="object-cover"
+                  src="/assets/about.JPG"
+                  alt="Dine Boro" fill className="object-cover"
                 />
               </div>
             </motion.div>
@@ -420,29 +420,45 @@ export function DesignAgency() {
           >
             <h3 className="text-xl font-bold">Send a Message</h3>
             <p className="text-sm text-muted-foreground mt-1">I&apos;ll get back to you as soon as possible.</p>
-            <form className="mt-6 space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <label htmlFor="first-name" className="text-sm font-medium">First name</label>
-                  <Input id="first-name" placeholder="Your first name" className="rounded-2xl" />
+            {formSent ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                className="mt-6 flex flex-col items-center justify-center gap-3 py-12 text-center"
+              >
+                <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Mail className="h-7 w-7 text-primary" />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="last-name" className="text-sm font-medium">Last name</label>
-                  <Input id="last-name" placeholder="Your last name" className="rounded-2xl" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">Email</label>
-                <Input id="email" type="email" placeholder="your@email.com" className="rounded-2xl" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">Message</label>
-                <Textarea id="message" placeholder="Tell me about your project..." className="min-h-[120px] rounded-2xl" />
-              </div>
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button type="submit" className="w-full rounded-2xl">Send Message</Button>
+                <h4 className="text-lg font-semibold">Message sent!</h4>
+                <p className="text-sm text-muted-foreground">Thanks for reaching out. I&apos;ll get back to you soon.</p>
+                <button onClick={() => setFormSent(false)} className="text-sm text-primary underline underline-offset-4 mt-2">
+                  Send another message
+                </button>
               </motion.div>
-            </form>
+            ) : (
+              <form className="mt-6 space-y-4" onSubmit={handleFormSubmit}>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label htmlFor="first-name" className="text-sm font-medium">First name</label>
+                    <Input id="first-name" placeholder="Your first name" className="rounded-2xl" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="last-name" className="text-sm font-medium">Last name</label>
+                    <Input id="last-name" placeholder="Your last name" className="rounded-2xl" required />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium">Email</label>
+                  <Input id="email" type="email" placeholder="your@email.com" className="rounded-2xl" required />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">Message</label>
+                  <Textarea id="message" placeholder="Tell me about your project..." className="min-h-[120px] rounded-2xl" required />
+                </div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button type="submit" className="w-full rounded-2xl">Send Message</Button>
+                </motion.div>
+              </form>
+            )}
           </motion.div>
         </motion.div>
       </section>
