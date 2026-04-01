@@ -346,7 +346,7 @@ export function DesignAgency() {
               <div className="relative h-[420px] w-full overflow-hidden rounded-3xl">
                 <Image
                   src="/assets/about.JPG"
-                  alt="Dine Boro" fill className="object-cover"
+                  alt="Dine Boro" fill className="object-cover object-top"
                 />
               </div>
             </motion.div>
