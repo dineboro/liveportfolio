@@ -343,11 +343,18 @@ export function DesignAgency() {
               initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }} className="flex items-center justify-center p-6"
             >
-              <div className="relative h-[420px] w-full overflow-hidden rounded-3xl">
-                <Image
-                  src="/assets/about.JPG"
-                  alt="Dine Boro" fill className="object-cover object-top"
-                />
+              <div className="relative">
+                {/* Decorative offset border */}
+                <div className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl border-2 border-primary/40 -z-10" />
+                {/* Photo frame */}
+                <div className="relative w-[260px] md:w-[300px] overflow-hidden rounded-2xl border-4 border-muted shadow-xl" style={{ aspectRatio: '3/4' }}>
+                  <Image
+                    src="/assets/about.JPG"
+                    alt="Dine Boro"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
               </div>
             </motion.div>
           </div>
