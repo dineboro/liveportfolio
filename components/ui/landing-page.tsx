@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowRight, ArrowUpRight, Mail, MapPin, ExternalLink } from "lucide-react"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { FaLinkedin } from "react-icons/fa6"
@@ -34,31 +34,31 @@ const itemFadeIn = {
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const frontendSkills = [
-  { name: "HTML5",      level: "Experienced" },
-  { name: "CSS3",       level: "Experienced" },
-  { name: "Sass",       level: "Intermediate" },
-  { name: "JavaScript", level: "Intermediate" },
-  { name: "React",      level: "Basic" },
-  { name: "UX / UI",   level: "Experienced" },
+  { name: "HTML5",      level: "3 Years" },
+  { name: "CSS3",       level: "3 Years" },
+  { name: "Sass",       level: "2 Years" },
+  { name: "JavaScript", level: "2 Years" },
+  { name: "React",      level: "1 Year" },
+  { name: "UX / UI",   level: "4 Years" },
 ]
 
 const backendSkills = [
-  { name: "PHP",        level: "Advanced" },
-  { name: "Python",     level: "Intermediate" },
-  { name: "Java",       level: "Intermediate" },
-  { name: "MySQL",      level: "Intermediate" },
-  { name: "WordPress",  level: "Experienced" },
-  { name: "Shopify",    level: "Experienced" },
-  { name: "Git / GitHub", level: "Advanced" },
-  { name: "Figma",      level: "Experienced" },
-  { name: "Adobe XD",   level: "Experienced" },
+  { name: "PHP",        level: "2 Years" },
+  { name: "Python",     level: "3 Years" },
+  { name: "Java",       level: "2 Years" },
+  { name: "MySQL",      level: "2 Years" },
+  { name: "WordPress",  level: "5 Years" },
+  { name: "Shopify",    level: "2 Years" },
+  { name: "Git / GitHub", level: "2 Years" },
+  { name: "Figma",      level: "4 Years" },
+  { name: "Adobe XD",   level: "4 Years" },
 ]
 
 const levelColor: Record<string, string> = {
-  Advanced:     "bg-primary text-primary-foreground",
-  Experienced:  "bg-foreground text-background",
-  Intermediate: "bg-muted text-foreground",
-  Basic:        "bg-muted/50 text-muted-foreground",
+  "5 Years":     "bg-primary text-primary-foreground",
+  "4 Years":  "bg-foreground text-background",
+  "3 Years": "bg-muted text-foreground",
+  "2 Years":        "bg-muted/50 text-muted-foreground",
 }
 
 const projects = [
@@ -108,8 +108,15 @@ export function DesignAgency() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
+    const data = new URLSearchParams(new FormData(form) as unknown as Record<string, string>)
+    await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data.toString(),
+    })
     setFormSent(true)
   }
 
@@ -459,27 +466,28 @@ export function DesignAgency() {
                 </button>
               </motion.div>
             ) : (
-              <form className="mt-6 space-y-4" onSubmit={handleFormSubmit}>
+              <form className="mt-6 space-y-4" name="contact" method="POST" data-netlify="true" onSubmit={handleFormSubmit}>
+                <input type="hidden" name="form-name" value="contact" />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <label htmlFor="first-name" className="text-sm font-medium">First name</label>
-                    <Input id="first-name" placeholder="Your first name" className="rounded-2xl" required />
+                    <Input id="first-name" name="first-name" placeholder="Your first name" className="rounded-2xl" required />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="last-name" className="text-sm font-medium">Last name</label>
-                    <Input id="last-name" placeholder="Your last name" className="rounded-2xl" required />
+                    <Input id="last-name" name="last-name" placeholder="Your last name" className="rounded-2xl" required />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">Email</label>
-                  <Input id="email" type="email" placeholder="your@email.com" className="rounded-2xl" required />
+                  <Input id="email" name="email" type="email" placeholder="your@email.com" className="rounded-2xl" required />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">Message</label>
-                  <Textarea id="message" placeholder="Tell me about your project..." className="min-h-[120px] rounded-2xl" required />
+                  <Textarea id="message" name="message" placeholder="Tell me about your project..." className="min-h-[120px] rounded-2xl" required />
                 </div>
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button type="submit" className="w-full rounded-2xl">Send Message</Button>
+                  <button type="submit" className={cn(buttonVariants(), "w-full rounded-2xl")}>Send Message</button>
                 </motion.div>
               </form>
             )}

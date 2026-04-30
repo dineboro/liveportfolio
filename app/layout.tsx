@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Nourou Dine — Portfolio",
+  title: "Nourou Dine",
   description: "Personal portfolio of Nourou Dine",
 };
 
